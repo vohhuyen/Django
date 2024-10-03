@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musician List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .musician-list {
+            list-style: none;
+            padding: 0;
+        }
+        .musician-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .musician-item:last-child {
+            border-bottom: none;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            background: #007BFF;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Musician List</h1>
+        <a href="{% url 'musician_create' %}" class="btn">Add New Musician</a>
+        <ul class="musician-list">
+            {% for musician in musicians %}
+                <li class="musician-item">
+                    <span>{{ musician.first_name }} {{ musician.last_name }} - {{ musician.instrument }}</span>
+                    <div class="actions">
+                        <a href="{% url 'musician_edit' musician.id %}" class="btn">Edit</a>
+                        <a href="{% url 'musician_delete' musician.id %}" class="btn" style="background: #dc3545;">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
