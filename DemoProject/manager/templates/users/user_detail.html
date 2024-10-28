@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>User: {{ user.username }}</h1>
+<p>Email: {{ user.email }}</p>
+<a href="{% url 'user_update' user.pk %}">Edit</a>
+<a href="{% url 'user_delete' user.pk %}">Delete</a>
+<a href="{% url 'user_list' %}">Back to Users</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delete-department-container">
+  <h1>Delete Department: {{ object.name }}</h1>
+  
+  <p class="confirmation-text">Are you sure you want to delete this department?</p>
+  
+  <form method="post" class="delete-form">
+    {% csrf_token %}
+    <button type="submit" class="delete-btn">Yes, delete</button>
+    <a href="{% url 'department_list' %}" class="cancel-btn">Cancel</a>
+  </form>
+</div>
+{% endblock %}

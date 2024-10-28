@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="department-container">
+  <h1>Department List</h1>
+  <div class="create-link">
+    <a href="{% url 'department_create' %}">Create new department</a>
+  </div>
+  <ul class="department-list">
+    {% for department in departments %}
+      <li class="department-item">
+        <a href="{% url 'department_detail' department.pk %}" class="department-name">{{ department.name }}</a>
+        <div class="action-links">
+          <a href="{% url 'department_update' department.pk %}" class="edit-link">Edit</a>
+          <a href="{% url 'department_delete' department.pk %}" class="delete-link">Delete</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="department-item">No departments available.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="department-detail-container">
+  <h1>Department: {{ department.name }}</h1>
+  
+  <p class="department-description">{{ department.description }}</p>
+
+  <h2>Employees</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee Name</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+        <tr>
+          <td>{{ employee.job_title }}</td> <!-- Tên nhân viên (job_title) -->
+          <td>{{ employee.user.username }}</td> <!-- Tên user -->
+          <td>{{ employee.user.email }}</td> <!-- Email của user -->
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No employees found for this department.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="action-buttons">
+    <a href="{% url 'department_update' department.pk %}" class="edit-btn">Edit</a>
+    <a href="{% url 'department_delete' department.pk %}" class="delete-btn">Delete</a>
+    <a href="{% url 'department_list' %}" class="back-btn">Back to list</a>
+  </div>
+</div>
+{% endblock %} 

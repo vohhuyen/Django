@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Task Detail</h2>
+<p>Title: {{ task.title }}</p>
+<p>Description: {{ task.description }}</p>
+<p>Emoloyee: {{ task.employee.user.username }}</p>
+<p>Status: {{ task.get_status_display }}</p>
+<p>Start Date: {{ task.start_date }}</p>
+<p>End Date: {{ task.end_date }}</p>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Department Management{% endblock %}</title>
+    
+    <!-- Link to the CSS stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/departments/list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+</head>
+
+<body>
+    <main>
+        <div class="flex">
+            <div class="profile clearfix">
+                <div class="profile-pic">
+                    <img style="width: 50px; height: 50px; border-radius: 50%;" src="{% static 'images/default-image-user.jpg' %}" alt="...">
+
+                </div>
+                <div class="profile_info">
+                  <span>Welcome,</span>
+                  <b>{{ request.user.get_full_name|default:request.user.username }}</b>
+                </div>
+                <nav>
+                    {% if perms.staffmanager.view_department %}
+                    <a href="{% url 'department_list' %}">Department</a>
+                    {% endif %}
+                    {% if perms.staffmanager.view_user %}
+                    <a href="{% url 'user_list' %}">User</a>
+                    {% endif %}
+                    {% if perms.staffmanager.view_employee %}
+                    <a href="{% url 'employee_list' %}">Employees</a>
+                    {% endif %}
+                    {% if perms.staffmanager.view_attendance %} 
+                    <a href="#">Attendance</a>
+                    {% endif %}
+                    <a href="{% url 'list_tasks' %}">Tasks</a> 
+                    {% if perms.staffmanager.view_permission %}
+                    <a href="#">User authorization</a> 
+                    {% endif %}
+                    <a href="#">Settings</a> 
+                    <a><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form></a> 
+                </nav>
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>
